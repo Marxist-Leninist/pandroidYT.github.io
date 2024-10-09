@@ -2,11 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DoXXd</title>
+    <title>DoXXd - Home and Contact</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Include any necessary scripts here -->
+    <style>
+        /* Basic styles for layout and functionality */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #1DA1F2;
+            color: white;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding-left: 0;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar, .right-sidebar {
+            width: 20%;
+            background-color: #F5F8FA;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .feed {
+            width: 60%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .post-input textarea {
+            width: 100%;
+            resize: none;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .post-input button {
+            float: right;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #1DA1F2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .post-card {
+            background-color: #FFF;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #E1E8ED;
+            border-radius: 5px;
+        }
+        .post-user {
+            display: flex;
+            align-items: center;
+        }
+        .post-user .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .post-content {
+            margin-top: 10px;
+        }
+        .tweet-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #1DA1F2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .trending, .user-info {
+            margin-bottom: 20px;
+        }
+        .trending-list, .user-info {
+            list-style: none;
+            padding-left: 0;
+        }
+        .trending-list li, .follow-suggestion {
+            margin-bottom: 10px;
+        }
+        .follow-suggestion {
+            display: flex;
+            align-items: center;
+        }
+        .follow-suggestion .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .follow-suggestion button {
+            padding: 6px 12px;
+            background-color: #1DA1F2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        footer {
+            text-align: center;
+        }
+        /* Additional styles can be added here */
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -28,7 +149,7 @@
         <!-- Sidebar Section -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="img/logo.png" alt="DoXXd Logo">
+                <img src="img/logo.png" alt="DoXXd Logo" style="width: 100%; height: auto;">
             </div>
             <nav>
                 <ul>
@@ -99,8 +220,8 @@
                     <img src="img/user3.png" alt="User" class="avatar">
                     <div class="follow-info">
                         <p>@new_user</p>
-                        <button>Follow</button>
                     </div>
+                    <button>Follow</button>
                 </div>
             </div>
         </aside>
@@ -110,5 +231,72 @@
     <footer>
         <p>&copy; 2024 DoXXd</p>
     </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Functionality for the "Post" button
+        document.querySelector('.post-input button').addEventListener('click', function() {
+            const textarea = document.querySelector('.post-input textarea');
+            const content = textarea.value.trim();
+            if (content) {
+                // Create a new post card
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+
+                const postUser = document.createElement('div');
+                postUser.className = 'post-user';
+
+                const avatar = document.createElement('img');
+                avatar.className = 'avatar';
+                avatar.src = 'img/user_placeholder.png'; // Replace with actual user image
+                avatar.alt = 'User Profile Picture';
+
+                const username = document.createElement('div');
+                username.className = 'username';
+                username.textContent = '@current_user'; // Replace with actual username
+
+                postUser.appendChild(avatar);
+                postUser.appendChild(username);
+
+                const postContent = document.createElement('div');
+                postContent.className = 'post-content';
+                postContent.textContent = content;
+
+                postCard.appendChild(postUser);
+                postCard.appendChild(postContent);
+
+                // Insert the new post at the top
+                const homeSection = document.querySelector('#home');
+                homeSection.insertBefore(postCard, homeSection.querySelector('.post-card'));
+
+                // Clear the textarea
+                textarea.value = '';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Functionality for the "Follow" button
+        document.querySelectorAll('.follow-suggestion button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.textContent = 'Following';
+                this.style.backgroundColor = '#657786';
+            });
+        });
+
+        // Functionality for the "New Post" button
+        document.querySelector('.tweet-btn').addEventListener('click', function() {
+            document.querySelector('.post-input textarea').focus();
+        });
+    </script>
 </body>
 </html>
