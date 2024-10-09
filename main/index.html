@@ -8,68 +8,106 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Include any necessary scripts here -->
     <style>
-        /* Basic styles for layout and functionality */
-        body {
+        /* Reset and base styles */
+        * {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
         }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #14171A;
+            background-color: #E6ECF0;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Layout styles */
         header, footer {
             background-color: #1DA1F2;
             color: white;
-            padding: 10px;
+            padding: 10px 20px;
         }
-        nav ul {
+        header nav ul {
             list-style: none;
             display: flex;
-            padding-left: 0;
+            justify-content: space-around;
         }
-        nav ul li {
-            margin-right: 15px;
-        }
-        nav ul li a {
+        header nav ul li a {
             color: white;
-            text-decoration: none;
+            font-weight: 500;
         }
         .container {
             display: flex;
-            flex: 1;
+            max-width: 1200px;
+            margin: 20px auto;
         }
         .sidebar, .right-sidebar {
-            width: 20%;
-            background-color: #F5F8FA;
+            width: 25%;
             padding: 20px;
-            box-sizing: border-box;
+            background-color: #F5F8FA;
         }
         .feed {
-            width: 60%;
+            width: 50%;
             padding: 20px;
-            box-sizing: border-box;
+            background-color: #FFFFFF;
         }
-        .post-input textarea {
+        /* Sidebar styles */
+        .sidebar .logo img {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+        .sidebar nav ul {
+            list-style: none;
+        }
+        .sidebar nav ul li {
+            margin-bottom: 15px;
+        }
+        .sidebar nav ul li a {
+            font-size: 18px;
+            color: #1DA1F2;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .tweet-btn {
             width: 100%;
-            resize: none;
             padding: 10px;
-            box-sizing: border-box;
-        }
-        .post-input button {
-            float: right;
-            margin-top: 10px;
-            padding: 8px 16px;
             background-color: #1DA1F2;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        /* Feed styles */
+        .post-input {
+            border-bottom: 1px solid #E1E8ED;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .post-input textarea {
+            width: 100%;
+            border: none;
+            font-size: 18px;
+            resize: none;
+            outline: none;
+            margin-bottom: 10px;
+        }
+        .post-input button {
+            background-color: #1DA1F2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            float: right;
         }
         .post-card {
-            background-color: #FFF;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #E1E8ED;
-            border-radius: 5px;
+            border-bottom: 1px solid #E1E8ED;
+            padding: 15px 0;
         }
         .post-user {
             display: flex;
@@ -81,32 +119,34 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        .post-user .username {
+            font-weight: 600;
+            color: #14171A;
+        }
         .post-content {
             margin-top: 10px;
+            font-size: 16px;
+            color: #14171A;
         }
-        .tweet-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #1DA1F2;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-top: 20px;
+        /* Right Sidebar styles */
+        .right-sidebar h2, .right-sidebar h3 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #14171A;
         }
-        .trending, .user-info {
-            margin-bottom: 20px;
-        }
-        .trending-list, .user-info {
+        .trending-list, .follow-suggestion {
             list-style: none;
             padding-left: 0;
         }
-        .trending-list li, .follow-suggestion {
+        .trending-list li {
             margin-bottom: 10px;
+            color: #1DA1F2;
+            cursor: pointer;
         }
         .follow-suggestion {
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
         }
         .follow-suggestion .avatar {
             width: 40px;
@@ -114,19 +154,60 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        .follow-suggestion .follow-info p {
+            margin: 0;
+            font-weight: 500;
+        }
         .follow-suggestion button {
-            padding: 6px 12px;
+            margin-left: auto;
             background-color: #1DA1F2;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
+            padding: 6px 12px;
             cursor: pointer;
-            margin-left: auto;
+            font-size: 14px;
         }
-        footer {
+        /* Contact Section styles */
+        #contact {
+            padding: 20px;
+        }
+        #contact h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #14171A;
+        }
+        #contact p {
+            font-size: 16px;
+            color: #14171A;
+        }
+        #contact a {
+            color: #1DA1F2;
+        }
+        /* Footer styles */
+        footer p {
             text-align: center;
+            font-size: 14px;
         }
-        /* Additional styles can be added here */
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar, .right-sidebar, .feed {
+                width: 100%;
+            }
+            .sidebar {
+                order: -1;
+            }
+            header nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            header nav ul li {
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -149,7 +230,7 @@
         <!-- Sidebar Section -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="img/logo.png" alt="DoXXd Logo" style="width: 100%; height: auto;">
+                <img src="img/logo.png" alt="DoXXd Logo">
             </div>
             <nav>
                 <ul>
@@ -288,13 +369,22 @@
         // Functionality for the "Follow" button
         document.querySelectorAll('.follow-suggestion button').forEach(button => {
             button.addEventListener('click', function() {
-                this.textContent = 'Following';
-                this.style.backgroundColor = '#657786';
+                if (this.textContent === 'Follow') {
+                    this.textContent = 'Following';
+                    this.style.backgroundColor = '#657786';
+                } else {
+                    this.textContent = 'Follow';
+                    this.style.backgroundColor = '#1DA1F2';
+                }
             });
         });
 
         // Functionality for the "New Post" button
         document.querySelector('.tweet-btn').addEventListener('click', function() {
+            window.scrollTo({
+                top: document.querySelector('.post-input').offsetTop - 20,
+                behavior: 'smooth'
+            });
             document.querySelector('.post-input textarea').focus();
         });
     </script>
